@@ -1,5 +1,5 @@
 import unittest
-from sort_practice.sort_function import bubble_sort
+from sort_practice.sort_function import *
 
 class Test_sort_function(unittest.TestCase):
     def setUp(self):
@@ -15,6 +15,10 @@ class Test_sort_function(unittest.TestCase):
         self.q4 = [-5, -8, 2, 7, 0, 3, 0, -5]
         self.q4_descend_ans = [7, 3, 2, 0, 0, -5, -5, -8]
     
+    def test_compare(self):
+        self.assertEqual(compare(5, 4), 5 > 4)
+        self.assertEqual(compare(5, 4, reverse=True), 4 > 5)
+
     def test_bubble_sort(self):
         bubble_sort(self.q1)
         self.assertEqual(self.q1, self.q1_ascend_ans)
