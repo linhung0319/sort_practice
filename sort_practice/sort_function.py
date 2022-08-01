@@ -32,6 +32,26 @@ def selection_sort(nums, key=lambda x: x, reverse=False):
         ### to place the minimum in front of the unsorted array
         nums[i], nums[min_i] = nums[min_i], nums[i]    
         
+def insertion_sort(nums, key=lambda x: x, reverse=False):
+    n = len(nums)
+    ### The first element is assumed to be sorted,
+    ### so we start from the second element.
+    for i in range(1, n):
+        ### place the unsorted element nums[i]
+        ### at the correct position in the 
+        ### sorted part of array  
+        for j in range(i - 1, -1, -1):
+            ### If the unsorted element need to insert to
+            ### the left of the sorted elements, the sorted
+            ### element need to shift by one to the right
+            if compare(key(nums[j]), key(nums[j+1]), reverse):
+                nums[j], nums[j+1] = nums[j+1], nums[j]
+            else:
+                ### The correct position of the unsorted
+                ### element is just behind the value 
+                ### smaller than it
+                continue
+
 
 if __name__ == '__main__':
     nums = [5, -1, 4, 2, 2]
