@@ -14,6 +14,12 @@ class Test_sort_function(unittest.TestCase):
        
         self.q4 = [-5, -8, 2, 7, 0, 3, 0, -5]
         self.q4_descend_ans = [7, 3, 2, 0, 0, -5, -5, -8]
+
+        self.q5 = [1]
+        self.q5_ans = [1]
+
+        self.q6 = []
+        self.q6_ans = []
     
     def test_compare(self):
         self.assertEqual(compare(5, 4), 5 > 4)
@@ -32,6 +38,12 @@ class Test_sort_function(unittest.TestCase):
         bubble_sort(self.q4, reverse=True)
         self.assertEqual(self.q4, self.q4_descend_ans)
 
+        bubble_sort(self.q5)
+        self.assertEqual(self.q5, self.q5_ans)
+
+        bubble_sort(self.q6)
+        self.assertEqual(self.q6, self.q6_ans)
+
     def test_selection_sort(self):
         selection_sort(self.q1)
         self.assertEqual(self.q1, self.q1_ascend_ans)
@@ -44,3 +56,9 @@ class Test_sort_function(unittest.TestCase):
         
         selection_sort(self.q4, reverse=True)
         self.assertEqual(self.q4, self.q4_descend_ans)
+
+        selection_sort(self.q5)
+        self.assertEqual(self.q5, self.q5_ans)
+
+        selection_sort(self.q6)
+        self.assertEqual(self.q6, self.q6_ans)
