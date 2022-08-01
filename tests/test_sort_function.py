@@ -32,4 +32,15 @@ class Test_sort_function(unittest.TestCase):
         bubble_sort(self.q4, reverse=True)
         self.assertEqual(self.q4, self.q4_descend_ans)
 
-    
+    def test_selection_sort(self):
+        selection_sort(self.q1)
+        self.assertEqual(self.q1, self.q1_ascend_ans)
+        
+        selection_sort(self.q2)
+        self.assertEqual(self.q2, self.q2_ascend_ans)
+        
+        selection_sort(self.q3)
+        self.assertEqual(self.q3, self.q3_ascend_ans)
+        
+        selection_sort(self.q4, reverse=True)
+        self.assertEqual(self.q4, self.q4_descend_ans)
