@@ -100,14 +100,33 @@ def merge_sort(nums, key=lambda x: x, reverse=False):
         sorted_len = sorted_len_2
         
 def quick_sort(nums, key=lambda x: x, reverse=False):
-    def partition(left, right):
-        pivot = nums[right]
-        pivot_i = left
-        for i in range(left, right + 1):
+    ### Place elements smaller than pivot before pivot
+    ### and elements greater than pivot after pivot.
+    def partition(start, end):
+        ### Chose the rightmost element as the pivot
+        pivot = nums[end]
+        ### The index of the first element of the right partition
+        r_first_i = start
+        for i in range(start, end + 1):
+            ### If the value is less or equal to the pivot,
+            ### swap with the first index of the right partition,
+            ### The first index of the right partition thus increases by one.   
             if not compare(key(nums[i]), key(pivot), reverse):
-                nums[i], nums[pivot_i] = nums[pivot_i], nums[i]
-                pivot_i += 1
-    partition(0, 4)
+                nums[i], nums[r_first_i] = nums[r_first_i], nums[i]
+                r_first_i += 1
+        ### The pivot index is right before the first 
+        ### index of the right partition
+        return r_first_i - 1
+    
+    def recursive_partition(start, end):
+        if start >= end:
+            return
+        pivot_i = partition(start, end)
+        recursive_partition(start, pivot_i - 1)
+        recursive_partition(pivot_i + 1, end)
+    
+    recursive_partition(0, len(nums) - 1)
+   
 
 
     
