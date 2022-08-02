@@ -53,10 +53,14 @@ def insertion_sort(nums, key=lambda x: x, reverse=False):
                 continue
 
 def merge_sort(nums, key=lambda x: x, reverse=False):
+    ### merge_op can merge two sorted 
+    ### parts into a merge sorted array
     def merge_op(l1, r1, l2, r2):
         tmp = []
         start = l1
         end = r2
+        ### Take the smaller value from both parts and 
+        ### store it in tmp that will hold the findal answer
         while l1 <= r1 and l2 <= r2:
             if compare(key(nums[l1]), key(nums[l2]), reverse):
                 tmp.append(nums[l2])
@@ -72,7 +76,31 @@ def merge_sort(nums, key=lambda x: x, reverse=False):
             l2 += 1
         nums[start:end + 1] = tmp
 
-    merge_op(0, 2, 3, 4)
+    ### Consider a single element as a sorted part.
+    n = len(nums)
+    sorted_len = 1
+    while sorted_len <= n:
+        ### perform merge_op on two sorted parts
+        sorted_len_2 = sorted_len * 2
+        for i in range(0, n, sorted_len_2):
+            l1 = i
+            r1 = i + sorted_len - 1
+            l2 = i + sorted_len
+            r2 = i + sorted_len_2 - 1
+            ### If no second sorted part remains,
+            ### merge_op is not required
+            if l2 >= n:
+                break
+            ### the second sorted part remains,
+            ### but the actual lenght is smaller
+            ### than sorted_len.
+            if r2 >= n:
+                r2 = n - 1
+            merge_op(l1, r1, l2, r2)
+        sorted_len = sorted_len_2
+        
+
+    
 
 
 
