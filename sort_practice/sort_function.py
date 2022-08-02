@@ -99,10 +99,18 @@ def merge_sort(nums, key=lambda x: x, reverse=False):
             merge_op(l1, r1, l2, r2)
         sorted_len = sorted_len_2
         
+def quick_sort(nums, key=lambda x: x, reverse=False):
+    def partition(left, right):
+        pivot = nums[right]
+        pivot_i = left
+        for i in range(left, right + 1):
+            if not compare(key(nums[i]), key(pivot), reverse):
+                nums[i], nums[pivot_i] = nums[pivot_i], nums[i]
+                pivot_i += 1
+    partition(0, 4)
+
 
     
-
-
 
 if __name__ == '__main__':
     nums = [5, -1, 4, 2, 2]
@@ -110,5 +118,6 @@ if __name__ == '__main__':
     #bubble_sort(nums)
     #selection_sort(nums)
     #insertion_sort(nums)
-    merge_sort(nums)
+    #merge_sort(nums)
+    quick_sort(nums)
     print(nums)
