@@ -52,9 +52,35 @@ def insertion_sort(nums, key=lambda x: x, reverse=False):
                 ### smaller than it
                 continue
 
+def merge_sort(nums, key=lambda x: x, reverse=False):
+    def merge_op(l1, r1, l2, r2):
+        tmp = []
+        start = l1
+        end = r2
+        while l1 <= r1 and l2 <= r2:
+            if compare(key(nums[l1]), key(nums[l2]), reverse):
+                tmp.append(nums[l2])
+                l2 += 1
+            else:
+                tmp.append(nums[l1])
+                l1 += 1
+        while l1 <= r1:
+            tmp.append(nums[l1])
+            l1 += 1
+        while l2 <= r2:
+            tmp.append(nums[l2])
+            l2 += 1
+        nums[start:end + 1] = tmp
+
+    merge_op(0, 2, 3, 4)
+
+
 
 if __name__ == '__main__':
     nums = [5, -1, 4, 2, 2]
+    #nums = [-1, 0, 1, -1, 5]
     #bubble_sort(nums)
-    selection_sort(nums)
+    #selection_sort(nums)
+    #insertion_sort(nums)
+    merge_sort(nums)
     print(nums)
