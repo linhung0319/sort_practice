@@ -5,6 +5,9 @@ class Heap():
         self.__reverse = reverse
         self.heapify(nums)
 
+    def __len__(self):
+        return len(self.__array)
+
     def _swap(self, left, right):
         self.__array[left], self.__array[right] = self.__array[right], self.__array[left]
 
