@@ -126,3 +126,6 @@ def quick_sort(nums, key=lambda x: x, reverse=False):
         recursive_partition(pivot_i + 1, end)
     
     recursive_partition(0, len(nums) - 1)
+
+def heap_sort(nums, key=lambda x: x, reverse=False):
+    pass
