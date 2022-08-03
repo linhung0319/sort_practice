@@ -41,9 +41,13 @@ class Heap():
         ### a complete binary tree, we pop the last
         ### element x and place it at the first index
         ### of the array to keep a complete binary tree
+        n = len(self.__array)
+        if n == 1:
+            return self.__array[0]
+
         pop_v = self.__array[0]
         self.__array[0] = self.__array.pop()
-        n = len(self.__array)
+        n -= 1
         x_i = 0
         ### Since x might not be in the heap order, we need to 
         ### check its child node and adjust the position of x

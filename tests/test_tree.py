@@ -52,3 +52,7 @@ class Test_Heap(unittest.TestCase):
         self.assertEqual(max_heap.pop(), 7)
         self.assertEqual(max_heap.pop(), 7)
         self.assertEqual(max_heap.pop(), 6)
+
+        x = [1]
+        min_heap = Heap(x)
+        self.assertEqual(min_heap.pop(), 1)
