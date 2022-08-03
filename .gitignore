@@ -1,0 +1,8 @@
+tests/__pycache__/test_tree.cpython-38.pyc
+sort_practice/__pycache__/sort_function.cpython-38.pyc
+sort_practice/__pycache__/__init__.cpython-38.pyc
+sort_practice/__pycache__/tree.cpython-38.pyc
+.vscode/settings.json
+*.pyc
+tests/__pycache__/test_sort_function.cpython-38.pyc
+__pycache__
