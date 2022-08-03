@@ -31,3 +31,12 @@ class Test_Heap(unittest.TestCase):
         max_heap.push(2)
         self.assertEqual(max_heap.show(), [2, 2, 1, -1])
 
+    def test_heapify(self):
+        min_heap = Heap()
+        x = [-1, 7, 6, 5, 4, 7, -1]
+        min_heap.heapify(x)
+        self.assertEqual(min_heap.show(), [-1, 4, -1, 7, 5, 7, 6])
+
+        max_heap = Heap(reverse=True)
+        max_heap.heapify(x)
+        self.assertEqual(max_heap.show(), [7, 5, 7, -1, 4, 6, -1])
