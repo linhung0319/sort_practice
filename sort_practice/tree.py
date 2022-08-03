@@ -1,12 +1,14 @@
 from sort_practice.sort_function import compare
 class Heap():
-    def __init__(self, key=lambda x: x, reverse=False):
-        self.__array = []
+    def __init__(self, nums=[], key=lambda x: x, reverse=False):
         self.__key = key
         self.__reverse = reverse
+        self.heapify(nums)
 
-    def heapify(self, x, key=lambda x: x, reverse=False):
-        pass
+    def heapify(self, nums):
+        self.__array = []
+        for x in nums:
+            self.push(x)
 
     def push(self, x):
         self.__array.append(x)
@@ -26,7 +28,6 @@ class Heap():
             self.__array[x_parent_i], self.__array[x_i] = self.__array[x_i], self.__array[x_parent_i]
             x_i = x_parent_i
                 
-
     def pop(self):
         pass
 
