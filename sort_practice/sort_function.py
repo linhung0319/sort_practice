@@ -126,17 +126,3 @@ def quick_sort(nums, key=lambda x: x, reverse=False):
         recursive_partition(pivot_i + 1, end)
     
     recursive_partition(0, len(nums) - 1)
-   
-
-
-    
-
-if __name__ == '__main__':
-    nums = [5, -1, 4, 2, 2]
-    #nums = [-1, 0, 1, -1, 5]
-    #bubble_sort(nums)
-    #selection_sort(nums)
-    #insertion_sort(nums)
-    #merge_sort(nums)
-    quick_sort(nums)
-    print(nums)
