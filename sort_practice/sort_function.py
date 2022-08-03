@@ -128,4 +128,7 @@ def quick_sort(nums, key=lambda x: x, reverse=False):
     recursive_partition(0, len(nums) - 1)
 
 def heap_sort(nums, key=lambda x: x, reverse=False):
-    pass
+    from sort_practice.tree import Heap
+    heap = Heap(nums, key=key, reverse=reverse)
+    for i in range(len(heap)):
+        nums[i] = heap.pop()
