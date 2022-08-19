@@ -78,5 +78,19 @@ class Test_BinarySearchTree(unittest.TestCase):
         node = self.bst.search(100)
         self.assertEqual(node, None)
 
+    def test_delete(self):
+        self.nums.sort()
+        self.bst.delete(3)
+        self.nums.remove(3)
+        self.assertEqual(self.bst.inorder(), self.nums)
+        
+        self.bst.delete(1)
+        self.nums.remove(1)
+        self.assertEqual(self.bst.inorder(), self.nums)
+
+        self.bst.delete(2)
+        self.nums.remove(2)
+        self.assertEqual(self.bst.inorder(), self.nums)
+
 if __name__ == '__main__':
     unittest.main(verbosity=2)
