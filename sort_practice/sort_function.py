@@ -129,6 +129,15 @@ def quick_sort(nums, key=lambda x: x, reverse=False):
 
 def heap_sort(nums, key=lambda x: x, reverse=False):
     from sort_practice.tree import Heap
+
+    ### Sort the array using Heap
     heap = Heap(nums, key=key, reverse=reverse)
     for i in range(len(heap)):
         nums[i] = heap.pop()
+
+def BST_sort(nums, key=lambda x:x, reverse=False):
+    from sort_practice.tree import BinarySearchTree
+    
+    ### Sort the array using Binary Search Tree
+    bst = BinarySearchTree(nums, key=key)
+    nums[:] = bst.inorder(reverse)
