@@ -4,6 +4,7 @@ class Heap():
     def __init__(self, nums=[], key=lambda x: x, reverse=False):
         self.__key = key
         self.__reverse = reverse
+        self.__array = []
         self.heapify(nums)
 
     def __len__(self):
@@ -95,6 +96,7 @@ class TreeNode():
 
 class BinaryTree(ABC):
     def __init__(self, nums):
+        self._root = None
         self.build(nums)
 
     @abstractmethod
@@ -152,7 +154,16 @@ class BinarySearchTree(BinaryTree):
         return TreeNode(x)
 
     def search(self, x):
-        pass
+        curr = self._root
+        while True:
+            if curr is None or self.__key(curr.val) == self.__key(x):
+                return curr
+            elif self.__key(curr.val) < self.__key(x):
+                ### If x > current node, search the right child node.
+                curr = curr.right
+            else:
+                ### If x < current node, search the left child node.
+                curr = curr.left
 
     def insert(self, x):
         new_node = self.make_node(x)
