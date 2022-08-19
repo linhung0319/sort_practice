@@ -193,4 +193,42 @@ class BinarySearchTree(BinaryTree):
                 curr = curr.left 
         
     def delete(self, x):
-        pass 
+        ### root is the representative of one tree.
+        ### Return the root of a tree in which 
+        ### we have already deleted x. 
+        def helper(root, x):
+            if root is None:
+                return root
+
+            if self.__key(root.val) < self.__key(x):
+                root.right = helper(root.right, x)
+            elif self.__key(root.val) > self.__key(x):
+                root.left = helper(root.left, x)
+            else:
+                if root.left is None and root.right is None:
+                    return None
+                if root.left is None:
+                    return root.right
+                if root.right is None:
+                    return root.left
+
+                ### Find the max value node 
+                ### in the left subtree 
+                curr = root.left
+                while curr.right:
+                    curr = curr.right
+
+                ### Copy the left subtree max value to
+                ### the current node. Now, we need to
+                ### delete the max value node in the left
+                ### subtree, since this node is dulplicated
+                root.val = curr.val
+                root.left = helper(root.left, curr.val)
+
+            return root
+
+        self._root = helper(self._root, x)
+
+        
+
+        
