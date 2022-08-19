@@ -85,3 +85,69 @@ class Heap():
 
     def show(self):
         return self.__array
+
+class TreeNode():
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+
+class BinarySearchTree():
+    def __init__(self, nums=[], key=lambda x: x, reverse=False):
+        self.__key = key
+        self.__reverse = reverse
+        self.__root = None
+
+    def insert(self, x):
+        new_node = TreeNode(x)
+        if not self.__root:
+            self.__root = new_node
+            return
+
+        ### Complare the new node with nodes in binary search tree.
+        ### If the new node is larger than node A, go to the right 
+        ### node of node A and vice versa. Repeat this process until 
+        ### we find an empty node.
+        curr = self.__root
+        while True:
+            if self.__key(curr.val) < self.__key(new_node.val):
+                ### If the node is empty, insert the new node
+                if not curr.right:
+                    curr.right = new_node
+                    return
+                ### If the node is not empty, search another node.
+                curr = curr.right
+            else:
+                ### If the node is empty, insert the new node
+                if not curr.left:
+                    curr.left = new_node
+                    return
+                ### If the node is not empty, search another node.
+                curr = curr.left 
+        
+    def inorder(self, reverse=None):
+        if reverse is not None:
+            self.__reverse = reverse
+        
+        array = []
+        def helper(root):
+            if not root:
+                return
+            helper(root.left)
+            array.append(root.val)
+            helper(root.right)
+
+        def helper_reverse(root):
+            if not root:
+                return
+            helper_reverse(root.right)
+            array.append(root.val)
+            helper_reverse(root.left)
+
+        if self.__reverse:
+            ### Append the tree into array in RDL order
+            helper_reverse(self.__root)
+        else:
+            ### Append the tree into array in LDR order 
+            helper(self.__root)
+        return array
