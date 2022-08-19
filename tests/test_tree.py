@@ -56,3 +56,13 @@ class Test_Heap(unittest.TestCase):
         x = [1]
         min_heap = Heap(x)
         self.assertEqual(min_heap.pop(), 1)
+
+class Test_BinarySearchTree(unittest.TestCase):
+    def test_insert(self):
+        nums = [3, 1, 0, -1, 3, 0, 2, 4]
+        bst = BinarySearchTree()
+        for num in nums:
+            bst.insert(num)
+        self.assertEqual(bst.inorder(), sorted(nums))
+        self.assertEqual(bst.inorder(reverse=True), 
+                         sorted(nums, reverse=True))
