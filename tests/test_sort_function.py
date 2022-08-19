@@ -1,3 +1,8 @@
+import os
+import sys
+script_dir = os.path.dirname(__file__)
+sys.path.append(os.path.join(script_dir, '../'))
+
 import unittest
 from sort_practice.sort_function import *
 
@@ -138,3 +143,7 @@ class Test_sort_function(unittest.TestCase):
 
         heap_sort(self.q6)
         self.assertEqual(self.q6, self.q6_ans)
+
+
+if __name__ == '__main__':
+    unittest.main(verbosity=2)
