@@ -1,3 +1,4 @@
+from abc import ABC, abstractmethod
 from sort_practice.sort_function import compare
 class Heap():
     def __init__(self, nums=[], key=lambda x: x, reverse=False):
@@ -92,23 +93,78 @@ class TreeNode():
         self.left = None
         self.right = None
 
-class BinarySearchTree():
-    def __init__(self, nums=[], key=lambda x: x, reverse=False):
+class BinaryTree(ABC):
+    def __init__(self, nums):
+        self.build(nums)
+
+    @abstractmethod
+    def make_node(self, x) -> TreeNode:
+        raise NotImplementedError()
+
+    @abstractmethod
+    def search(self, x):
+        raise NotImplementedError()
+
+    @abstractmethod
+    def insert(self, x):
+        raise NotImplementedError()
+
+    @abstractmethod
+    def delete(self, x):
+        raise NotImplementedError()
+
+    def build(self, nums):
+        ### Clear all nodes in the tree
+        self._root = None
+        for num in nums:
+            self.insert(num)
+
+    def inorder(self, reverse=False):
+        array = []
+        def helper(root: TreeNode):
+            if not root:
+                return
+            helper(root.left)
+            array.append(root.val)
+            helper(root.right)
+
+        def helper_reverse(root: TreeNode):
+            if not root:
+                return
+            helper_reverse(root.right)
+            array.append(root.val)
+            helper_reverse(root.left)
+
+        if reverse:
+            ### Append the tree into array in RDL order
+            helper_reverse(self._root)
+        else:
+            ### Append the tree into array in LDR order 
+            helper(self._root)
+        return array
+
+class BinarySearchTree(BinaryTree):
+    def __init__(self, nums=[], key=lambda x: x):
         self.__key = key
-        self.__reverse = reverse
-        self.__root = None
+        super(BinarySearchTree, self).__init__(nums)
+
+    def make_node(self, x):
+        return TreeNode(x)
+
+    def search(self, x):
+        pass
 
     def insert(self, x):
-        new_node = TreeNode(x)
-        if not self.__root:
-            self.__root = new_node
+        new_node = self.make_node(x)
+        if not self._root:
+            self._root = new_node
             return
 
         ### Complare the new node with nodes in binary search tree.
         ### If the new node is larger than node A, go to the right 
         ### node of node A and vice versa. Repeat this process until 
         ### we find an empty node.
-        curr = self.__root
+        curr = self._root
         while True:
             if self.__key(curr.val) < self.__key(new_node.val):
                 ### If the node is empty, insert the new node
@@ -125,29 +181,5 @@ class BinarySearchTree():
                 ### If the node is not empty, search another node.
                 curr = curr.left 
         
-    def inorder(self, reverse=None):
-        if reverse is not None:
-            self.__reverse = reverse
-        
-        array = []
-        def helper(root):
-            if not root:
-                return
-            helper(root.left)
-            array.append(root.val)
-            helper(root.right)
-
-        def helper_reverse(root):
-            if not root:
-                return
-            helper_reverse(root.right)
-            array.append(root.val)
-            helper_reverse(root.left)
-
-        if self.__reverse:
-            ### Append the tree into array in RDL order
-            helper_reverse(self.__root)
-        else:
-            ### Append the tree into array in LDR order 
-            helper(self.__root)
-        return array
+    def delete(self, x):
+        pass 
