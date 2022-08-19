@@ -6,7 +6,7 @@ sys.path.append(os.path.join(script_dir, '../'))
 
 from sort_practice.sort_function import *
 
-if __name__ == '__main__':
+def main():
     nums = [5, -1, 4, 2, 2]
     #nums = [-1, 0, 1, -1, 5]
     #bubble_sort(nums)
@@ -16,3 +16,6 @@ if __name__ == '__main__':
     #quick_sort(nums)
     heap_sort(nums)
     print(nums)
+
+if __name__ == '__main__':
+    main()
