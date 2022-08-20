@@ -94,13 +94,22 @@ class Test_BinarySearchTree(unittest.TestCase):
 
 class Test_AVLTree(unittest.TestCase):
     def setUp(self):
-        self.nums = [3, 1, 0, -1, 3, 0, 2, 4]
-        self.bst = BinarySearchTree(self.nums)
+        self.nums1 = [3, 1, 0, -1, 3, 0, 2, 4]
+        self.avl_tree1 = AVLTree(self.nums1)
 
+        self.nums2 = [3, 2, 1, -1, 5, 8, 1, 1, 2, 1, 0, -40,
+                      50, 2, 2, 2, -9, -9, -9, -9, -9, -9, -10]
+        self.avl_tree2 = AVLTree(self.nums2)
+        
     def test_insert(self):
-        self.assertEqual(self.bst.inorder(), sorted(self.nums))
-        self.assertEqual(self.bst.inorder(reverse=True), 
-                         sorted(self.nums, reverse=True))
+        self.assertEqual(self.avl_tree1.inorder(), sorted(self.nums1))
+        self.assertEqual(self.avl_tree1.inorder(reverse=True), 
+                         sorted(self.nums1, reverse=True))
+
+        self.assertEqual(self.avl_tree2.inorder(), sorted(self.nums2))
+        self.assertEqual(self.avl_tree2.inorder(reverse=True), 
+                         sorted(self.nums2, reverse=True))
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)

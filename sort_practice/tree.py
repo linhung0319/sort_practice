@@ -152,7 +152,7 @@ class BinaryTree(ABC):
 
 class BinarySearchTree(BinaryTree):
     def __init__(self, nums=[], key=lambda x: x):
-        self.__key = key
+        self._key = key
         super(BinarySearchTree, self).__init__(nums)
 
     def make_node(self, x):
@@ -161,9 +161,9 @@ class BinarySearchTree(BinaryTree):
     def search(self, x):
         curr = self._root
         while True:
-            if curr is None or self.__key(curr.val) == self.__key(x):
+            if curr is None or self._key(curr.val) == self._key(x):
                 return curr
-            elif self.__key(curr.val) < self.__key(x):
+            elif self._key(curr.val) < self._key(x):
                 ### If x > current node, search the right child node.
                 curr = curr.right
             else:
@@ -182,7 +182,7 @@ class BinarySearchTree(BinaryTree):
         ### we find an empty node.
         curr = self._root
         while True:
-            if self.__key(curr.val) < self.__key(new_node.val):
+            if self._key(curr.val) < self._key(new_node.val):
                 ### If the node is empty, insert the new node
                 if not curr.right:
                     curr.right = new_node
@@ -205,9 +205,9 @@ class BinarySearchTree(BinaryTree):
             if root is None:
                 return root
 
-            if self.__key(root.val) < self.__key(x):
+            if self._key(root.val) < self._key(x):
                 root.right = helper(root.right, x)
-            elif self.__key(root.val) > self.__key(x):
+            elif self._key(root.val) > self._key(x):
                 root.left = helper(root.left, x)
             else:
                 if root.left is None and root.right is None:
@@ -248,7 +248,7 @@ class AVLTree(BinarySearchTree):
             ### a tree in which x is inserted and vice versa.  
             if not root:
                 return self.make_node(x)
-            elif self.__key(root.val) < self.__key(x):
+            elif self._key(root.val) < self._key(x):
                 root.right = helper(root.right, x) 
             else:
                 root.left = helper(root.left, x)
@@ -265,17 +265,17 @@ class AVLTree(BinarySearchTree):
             ### If the balance is greater than 1 or smaller than
             ### -1, we need to re-balance the tree.
             ### Case 1 - left left
-            if balance > 1 and self.__key(x) < self.__key(root.left.val):
+            if balance > 1 and self._key(x) < self._key(root.left.val):
                 return self.right_rotate(root)
             ### Case 2 - left right
-            if balance > 1 and self.__key(x) > self.__key(root.left.val):
+            if balance > 1 and self._key(x) > self._key(root.left.val):
                 root.left = self.left_rotate(root.left)
                 return self.right_rotate(root)
             ### Case 3 - right right
-            if balance < -1 and self.__key(x) > self.__key(root.right.val):
+            if balance < -1 and self._key(x) > self._key(root.right.val):
                 return self.left_rotate(root)
             ### Case 4 - right left
-            if balance < -1 and self.__key(x) < self.__key(root.right.val):
+            if balance < -1 and self._key(x) < self._key(root.right.val):
                 root.right = self.right_rotate(root.right)
                 return self.left_rotate(root)
             
