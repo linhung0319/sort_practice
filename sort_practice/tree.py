@@ -284,6 +284,72 @@ class AVLTree(BinarySearchTree):
 
         self._root = helper(self._root, x)
         
+    def delete(self, x):
+        ### root is the representative of a tree.
+        ### Return the root of a tree in which 
+        ### we have already deleted x. 
+        def helper(root, x):
+            ### Complare x with nodes in the tree. If x is larger 
+            ### than root, the right subtree of root is updated to
+            ### a tree in which x is deleted and vice versa. 
+            if not root:
+                return root
+            if self._key(root.val) < self._key(x):
+                root.right = helper(root.right, x)
+            if self._key(root.val) > self._key(x):
+                root.left = helper(root.left, x)
+            if self._key(root.val) == self._key(x):
+                if root.left is None and root.right is None:
+                    return None
+                if root.left is None:
+                    return root.right
+                if root.right is None:
+                    return root.left
+
+                ### Find the max value node 
+                ### in the left subtree 
+                curr = root.left
+                while curr.right:
+                    curr = curr.right
+
+                ### Copy the left subtree max value to
+                ### the current node. Now, we need to
+                ### delete the max value node in the left
+                ### subtree, since this node is dulplicated
+                root.val = curr.val
+                root.left = helper(root.left, curr.val)
+
+            ### After we update the left or right subtree of root,
+            ### we need to update the height of root.
+            root.height = 1 + max( self.get_height(root.left), 
+                                   self.get_height(root.right) )
+
+            ### After we update the left or right subtree of root,
+            ### we need to check the balance of root.
+            balance = self.get_balance(root)
+
+            ### If the balance is greater than 1 or smaller than
+            ### -1, we need to re-balance the tree.
+            ### Case 1 - left left
+            if balance > 1 and self._key(x) > self._key(root.left.val):
+                return self.right_rotate(root)
+            ### Case 2 - left right
+            if balance > 1 and self._key(x) < self._key(root.left.val):
+                root.left = self.left_rotate(root.left)
+                return self.right_rotate(root)
+            ### Case 3 - right right
+            if balance < -1 and self._key(x) < self._key(root.right.val):
+                return self.left_rotate(root)
+            ### Case 4 - right left
+            if balance < -1 and self._key(x) > self._key(root.right.val):
+                root.right = self.right_rotate(root.right)
+                return self.left_rotate(root)
+            
+            ### If root is balance, we simply return root.
+            return root
+        
+        self._root = helper(self._root, x)
+
     def get_height(self, node: AVLTreeNode):
         if not node:
             return 0
