@@ -100,7 +100,7 @@ class Test_AVLTree(unittest.TestCase):
         self.nums2 = [3, 2, 1, -1, 5, 8, 1, 1, 2, 1, 0, -40,
                       50, 2, 2, 2, -9, -9, -9, -9, -9, -9, -10]
         self.avl_tree2 = AVLTree(self.nums2)
-        
+
     def test_insert(self):
         self.assertEqual(self.avl_tree1.inorder(), sorted(self.nums1))
         self.assertEqual(self.avl_tree1.inorder(reverse=True), 
@@ -110,6 +110,31 @@ class Test_AVLTree(unittest.TestCase):
         self.assertEqual(self.avl_tree2.inorder(reverse=True), 
                          sorted(self.nums2, reverse=True))
 
+    def test_delete(self):
+        self.nums2.sort()
+        self.avl_tree2.delete(3)
+        self.nums2.remove(3)
+        self.assertEqual(self.avl_tree2.inorder(), self.nums2)
+        
+        self.avl_tree2.delete(1)
+        self.nums2.remove(1)
+        self.assertEqual(self.avl_tree2.inorder(), self.nums2)
+
+        self.avl_tree2.delete(1)
+        self.nums2.remove(1)
+        self.assertEqual(self.avl_tree2.inorder(), self.nums2)
+
+        self.avl_tree2.delete(8)
+        self.nums2.remove(8)
+        self.assertEqual(self.avl_tree2.inorder(), self.nums2)
+
+        self.avl_tree2.delete(-9)
+        self.nums2.remove(-9)
+        self.assertEqual(self.avl_tree2.inorder(), self.nums2)
+
+        self.avl_tree2.delete(-9)
+        self.nums2.remove(-9)
+        self.assertEqual(self.avl_tree2.inorder(), self.nums2)
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
