@@ -141,3 +141,10 @@ def BSTree_sort(nums, key=lambda x:x, reverse=False):
     ### Sort the array using Binary Search Tree
     bst = BinarySearchTree(nums, key=key)
     nums[:] = bst.inorder(reverse)
+
+def AVLTree_sort(nums, key=lambda x:x, reverse=False):
+    from sort_practice.tree import AVLTree
+
+    ### Sort the array using AVL Tree
+    avl_tree = AVLTree(nums, key=key)
+    nums[:] = avl_tree.inorder(reverse)
