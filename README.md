@@ -262,7 +262,7 @@ Put the unsorted array into an AVL Tree. Traversing the tree inorder gets the so
 Everytime we insert or delete an element from the tree, nodes in the tree will balance the height of its left subtree and right subtree. 
 
 ```python
-BSTree_sort(nums, key=lambda x: x, reverse=False)
+AVLTree_sort(nums, key=lambda x: x, reverse=False)
 ```
 
 Best : O( n log n )
