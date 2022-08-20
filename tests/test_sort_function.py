@@ -163,6 +163,25 @@ class Test_sort_function(unittest.TestCase):
         BSTree_sort(self.q6)
         self.assertEqual(self.q6, self.q6_ans)
 
+    def test_AVLTree_sort(self):
+        AVLTree_sort(self.q1)
+        self.assertEqual(self.q1, self.q1_ascend_ans)
+        
+        AVLTree_sort(self.q2)
+        self.assertEqual(self.q2, self.q2_ascend_ans)
+        
+        AVLTree_sort(self.q3)
+        self.assertEqual(self.q3, self.q3_ascend_ans)
+        
+        AVLTree_sort(self.q4, reverse=True)
+        self.assertEqual(self.q4, self.q4_descend_ans)
+
+        AVLTree_sort(self.q5)
+        self.assertEqual(self.q5, self.q5_ans)
+
+        AVLTree_sort(self.q6)
+        self.assertEqual(self.q6, self.q6_ans)
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
