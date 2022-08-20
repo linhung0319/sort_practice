@@ -254,6 +254,11 @@ class AVLTree(BinarySearchTree):
                 root.left = helper(root.left, x)
         
             ### After we update the left or right subtree of root,
+            ### we need to update the height of root.
+            root.height = 1 + max( self.get_height(root.left), 
+                                   self.get_height(root.right) )
+
+            ### After we update the left or right subtree of root,
             ### we need to check the balance of root.
             balance = self.get_balance(root)
 
