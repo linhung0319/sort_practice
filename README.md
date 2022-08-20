@@ -1,6 +1,24 @@
 # sort_practice
 
-sort_practice is a practice project for sorting algorithm.
+sort_practice is a practice project for sorting algorithms.
+
+Now, it includes: 
+
+[Bubble Sort](#bubble-sort)
+
+[Selection Sort](#selection-sort)
+
+[Insertion Sort](#insertion-sort)
+
+[Merge Sort](#merge-sort)
+
+[Quick Sort](#quick-sort)
+
+[Heap Sort](#heap-sort)
+
+[Binary Search Tree Sort](#binary-search-tree-sort)
+
+[AVL Tree Sort](#avl-tree-sort)
 
 ## Installation
 
@@ -91,7 +109,7 @@ Quicksort highly depends on randomly accessing the data elements and swap elemen
 
 You can find the sorting function in ./sort_practice/sort_function.py
 
-## Bubble Sort
+## [Bubble Sort](#bubble-sort)
 
 For each pair of indeces, swap the elements if they are out of order
 
@@ -110,9 +128,17 @@ Stable : True
 ![](./resources/bubble_sort.png)
 
 ---
-## Selection Sort
+## [Selection Sort](#selection-sort)
 
 The algorithm divides the input list into two parts: sorted and unsorted sublists. In each iteration, the minimum (maximum) is selected from the unsorted sublists and swaped behind the end of the sorted sublist.  
+
+* ### Is selection sort stable or not?
+
+The algorithm descibed above not stable, but there is a variant selection sort. Instead of swapping the minimum value with the first element in the unsorted sublist, a variant of selection sort shift the elements between the first element and minimum value in the sublist by one.
+
+The problem is that insertions and shifts aren’t present in the standard formulation of Selection Sort, only the exchanges. So, we could say that the algorithm we’ve just described isn’t a variant of Selection Sort.
+
+However, there’s also ground to argue that it is. It preserves the main idea of Selection Sort: grow a sorted sub-array at the beginning of the array by repeatedly selecting the minimal elements of the unsorted part and placing them right at the end of the sorted sub-array. If we take that perspective, the insertions and shifts are nothing more than implementation details. Hence, they don’t change the logic, so the algorithm is a legitimate variant of Selection Sort.
 
 ```python
 selection_sort(nums, key=lambda x: x, reverse=False)
@@ -130,7 +156,7 @@ Stable : True
 
 ---
 
-## Insertion Sort
+## [Insertion Sort](#insertion-sort)
 
 The input list is divided into two parts: the unsorted and sorted sublist. In each iteration, the first element of the unsorted list is inserted into the correct position of the sorted list. 
 
@@ -149,7 +175,7 @@ Stable : True
 ![](./resources/insertion_sort.png)
 
 ---
-## Merge Sort
+## [Merge Sort](#merge-sort)
 
 1. Divide the unsorted list into n sublists, each containing one element (a list of one element is considered sorted).
 
@@ -170,14 +196,12 @@ Stable : True
 ![](./resources/merge_sort.png)
 
 ---
-## Quick Sort
+## [Quick Sort](#quick-sort)
 
 Quicksort is a divide-and-conquer algorithm. It works by selecting a 'pivot' element from the array and partitioning the other elements into two sub-arrays, according to whether they are less than or greater than the pivot. The sub-arrays are then sorted recursively
 
-
-
 ```python
-merge_sort(nums, key=lambda x: x, reverse=False)
+quick_sort(nums, key=lambda x: x, reverse=False)
 ```
 
 Best : O( n log n )
@@ -189,3 +213,62 @@ Space : O( 1 )
 Stable : False
 
 ![](./resources/quick_sort.jpg)
+
+---
+## [Heap Sort](#heap-sort)
+
+Use a heap to store the elements in the unsorted array, and pop the element from the heap one by one.
+
+A max-heap is a complete binary tree in which the value in each internal node is greater than or equal to the values in the children of that node. 
+
+```python
+heap_sort(nums, key=lambda x: x, reverse=False)
+```
+
+Best : O( n log n )
+
+Worst : O( n log n )
+
+Space : O( n )
+
+Stable : False
+
+![](./resources/heap_sort.webp)
+
+---
+## [Binary Search Tree Sort](#binary-search-tree-sort)
+
+Put the unsorted array into a Binary Search Tree. Traversing the tree inorder gets the sorted array.
+
+```python
+BSTree_sort(nums, key=lambda x: x, reverse=False)
+```
+
+Best : O( n log n )
+
+Worst : O( n^2 )
+
+Space : O( n )
+
+Stable : True   
+
+![](./resources/binary_search_tree.png)
+
+---
+## [AVL Tree Sort](#avl-tree-sort)
+
+Put the unsorted array into an AVL Tree. Traversing the tree inorder gets the sorted array.
+
+Everytime we insert or delete an element from the tree, nodes in the tree will balance the height of its left subtree and right subtree. 
+
+```python
+BSTree_sort(nums, key=lambda x: x, reverse=False)
+```
+
+Best : O( n log n )
+
+Worst : O( n log n )
+
+Space : O( n )
+
+Stable : True  
