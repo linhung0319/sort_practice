@@ -94,6 +94,11 @@ class TreeNode():
         self.left = None
         self.right = None
 
+class AVLTreeNode(TreeNode):
+    def __init__(self, val):
+        super(AVLTreeNode, self).__init__(val)
+        self.height = 1
+
 class BinaryTree(ABC):
     def __init__(self, nums):
         self._root = None
@@ -193,7 +198,7 @@ class BinarySearchTree(BinaryTree):
                 curr = curr.left 
         
     def delete(self, x):
-        ### root is the representative of one tree.
+        ### root is the representative of a tree.
         ### Return the root of a tree in which 
         ### we have already deleted x. 
         def helper(root, x):
@@ -229,6 +234,86 @@ class BinarySearchTree(BinaryTree):
 
         self._root = helper(self._root, x)
 
-        
+class AVLTree(BinarySearchTree):
+    def make_node(self, x):
+        return AVLTreeNode(x)
 
+    def insert(self, x):
+        ### root is the representative of a tree.
+        ### Return the root of a tree in which 
+        ### we have already inserted x. 
+        def helper(root, x):
+            ### Complare x with nodes in the tree. If x is larger 
+            ### than root, the right subtree of root is updated to
+            ### a tree in which x is inserted and vice versa.  
+            if not root:
+                return self.make_node(x)
+            elif self.__key(root.val) < self.__key(x):
+                root.right = helper(root.right, x) 
+            else:
+                root.left = helper(root.left, x)
         
+            ### After we update the left or right subtree of root,
+            ### we need to check the balance of root.
+            balance = self.get_balance(root)
+
+            ### If the balance is greater than 1 or smaller than
+            ### -1, we need to re-balance the tree.
+            ### Case 1 - left left
+            if balance > 1 and self.__key(x) < self.__key(root.left.val):
+                return self.right_rotate(root)
+            ### Case 2 - left right
+            if balance > 1 and self.__key(x) > self.__key(root.left.val):
+                root.left = self.left_rotate(root.left)
+                return self.right_rotate(root)
+            ### Case 3 - right right
+            if balance < -1 and self.__key(x) > self.__key(root.right.val):
+                return self.left_rotate(root)
+            ### Case 4 - right left
+            if balance < -1 and self.__key(x) < self.__key(root.right.val):
+                root.right = self.right_rotate(root.right)
+                return self.left_rotate(root)
+            
+            ### If root is balance, we simply return root.
+            return root
+
+        self._root = helper(self._root, x)
+        
+    def get_height(self, node: AVLTreeNode):
+        if not node:
+            return 0
+        return node.height
+
+    def get_balance(self, node: AVLTreeNode):
+        ### Balance is the height differce between the
+        ### left subtree and right subtree. 
+        if not node:
+            return 0
+        return self.get_height(node.left) - self.get_height(node.right)
+
+    def left_rotate(self, root: AVLTreeNode) -> AVLTreeNode:
+        ### Perform rotation
+        right_child = root.right
+        root.right = right_child.left
+        right_child.left = root
+
+        ### Update heights
+        root.height = 1 + max( self.get_height(root.left), 
+                               self.get_height(root.right) )
+        right_child.height = 1 + max( self.get_height(right_child.left), 
+                                      self.get_height(right_child.right) )
+
+        return right_child
+
+    def right_rotate(self, root: AVLTreeNode) -> AVLTreeNode:
+        ### Perform rotation
+        left_child = root.left
+        root.left = left_child.right
+        left_child.right = root
+
+        ### Update heights
+        root.height = 1 + max( self.get_height(root.left), 
+                               self.get_height(root.right) )
+        left_child.height = 1 + max( self.get_height(left_child.left), 
+                                     self.get_height(left_child.right) )
+        return left_child
