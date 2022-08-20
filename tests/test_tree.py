@@ -92,5 +92,15 @@ class Test_BinarySearchTree(unittest.TestCase):
         self.nums.remove(2)
         self.assertEqual(self.bst.inorder(), self.nums)
 
+class Test_AVLTree(unittest.TestCase):
+    def setUp(self):
+        self.nums = [3, 1, 0, -1, 3, 0, 2, 4]
+        self.bst = BinarySearchTree(self.nums)
+
+    def test_insert(self):
+        self.assertEqual(self.bst.inorder(), sorted(self.nums))
+        self.assertEqual(self.bst.inorder(reverse=True), 
+                         sorted(self.nums, reverse=True))
+
 if __name__ == '__main__':
     unittest.main(verbosity=2)
