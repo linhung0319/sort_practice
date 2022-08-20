@@ -135,7 +135,7 @@ def heap_sort(nums, key=lambda x: x, reverse=False):
     for i in range(len(heap)):
         nums[i] = heap.pop()
 
-def BST_sort(nums, key=lambda x:x, reverse=False):
+def BSTree_sort(nums, key=lambda x:x, reverse=False):
     from sort_practice.tree import BinarySearchTree
     
     ### Sort the array using Binary Search Tree

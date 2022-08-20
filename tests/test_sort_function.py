@@ -144,23 +144,23 @@ class Test_sort_function(unittest.TestCase):
         heap_sort(self.q6)
         self.assertEqual(self.q6, self.q6_ans)
 
-    def test_BST_sort(self):
-        BST_sort(self.q1)
+    def test_BSTree_sort(self):
+        BSTree_sort(self.q1)
         self.assertEqual(self.q1, self.q1_ascend_ans)
         
-        BST_sort(self.q2)
+        BSTree_sort(self.q2)
         self.assertEqual(self.q2, self.q2_ascend_ans)
         
-        BST_sort(self.q3)
+        BSTree_sort(self.q3)
         self.assertEqual(self.q3, self.q3_ascend_ans)
         
-        BST_sort(self.q4, reverse=True)
+        BSTree_sort(self.q4, reverse=True)
         self.assertEqual(self.q4, self.q4_descend_ans)
 
-        BST_sort(self.q5)
+        BSTree_sort(self.q5)
         self.assertEqual(self.q5, self.q5_ans)
 
-        BST_sort(self.q6)
+        BSTree_sort(self.q6)
         self.assertEqual(self.q6, self.q6_ans)
 
 
